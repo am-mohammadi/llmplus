@@ -8,7 +8,7 @@ def headers(authorization):
         'authority': 'chatgot-ai.chatgot.io',
         'accept': '*/*',
         'accept-language': 'en-US,en;q=0.9',
-        'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJtbWRpLmpvYkBnbWFpbC5jb20iLCJleHBpcmUiOjE3MDM5ODA4MDAwMDAsInJhbmRvbSI6IjJmYjgxMTFkYWU3YWRkYmVhOGFlZmU2MjNkZjNkZDIyIn0=.lmeREpHYMi9YWUkaPI8PNIjYWzj7CYHAR4qbO3vlI9k=',
+        'authorization': authorization,
         'cache-control': 'no-cache',
         'content-type': 'application/json',
         'origin': 'https://start.chatgot.io',
