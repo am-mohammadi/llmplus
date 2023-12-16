@@ -50,7 +50,7 @@ class API:
         }
     
         self.model = Models.GPT4()
-    def send(self, prompt):
+    def send(self, prompt, extract_code = None):
         self.json_data['messages'] += [{
             'role': 'user',
             'content': prompt,
@@ -74,6 +74,16 @@ class API:
                 break
             except Exception as e:
                 print(e)
+                
+        if extract_code is not None:
+            try:
+                if '```' in answer:
+                    answer = answer.split('```')[1].replace(extract_code, '')
+                else:
+                    answer = '{' + ('}'.join(('{'.join(answer.split('{')[1:]).split('}')[:-1]))) + '}'
+                print('extract_code done.')
+            except:
+                print('failed to extract_code')
                 
                 
         self.json_data['messages'] += [{

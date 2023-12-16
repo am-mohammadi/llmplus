@@ -22,3 +22,23 @@ Acsess to the chat history
 ```python
 API.json_data['messages']
 ```
+
+Extracting code block
+set extract_code to the type of code block to return just the code block
+```python
+asnwer2  = api.send('who is the CEO?', extract_code = "json")
+
+'''
+LLM output:
+your output is here
+```json
+{"a": "ssdgs"}
+```
+
+Output with extract_code:
+{"a": "ssdgs"}
+'''
+
+```
+
+
