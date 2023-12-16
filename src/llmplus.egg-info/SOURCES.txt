@@ -6,5 +6,4 @@ src/llmplus.egg-info/SOURCES.txt
 src/llmplus.egg-info/dependency_links.txt
 src/llmplus.egg-info/top_level.txt
 src/llmplus/ChatGot/Models.py
-src/llmplus/ChatGot/__init__.py
 src/llmplus/ChatGot/api.py

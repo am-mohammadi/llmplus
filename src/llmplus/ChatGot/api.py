@@ -1,6 +1,6 @@
 import requests
 from json import loads
-import Models
+from . import Models
 
 
 def headers(authorization):
@@ -62,7 +62,7 @@ class API:
     
     
         response = requests.post('https://chatgot-ai.chatgot.io/sql', 
-                                 headers=authorization.headers(self.authorization_key), 
+                                 headers=headers(self.authorization_key), 
                                  json=self.json_data)
         print(response)
         
