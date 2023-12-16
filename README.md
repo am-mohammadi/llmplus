@@ -8,7 +8,7 @@ api = API(authorization_key)
 api.model = Models.GPT4()
 answer = api.send('who is the manager of the real madrid?')
 
-asnwer2  = cg.send('who the CEO?')
+asnwer2  = api.send('who is the CEO?')
 ```
 
 Models
@@ -18,7 +18,7 @@ Models.GPT3
 Models.Claude2
 ```
 
-Acsess to chat history
+Acsess to the chat history
 ```python
 API.json_data['messages']
 ```
