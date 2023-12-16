@@ -60,15 +60,22 @@ class API:
         for key in self.model.json:
             self.json_data['model'][key] = self.model.json[key]
     
-    
-        response = requests.post('https://chatgot-ai.chatgot.io/sql', 
-                                 headers=headers(self.authorization_key), 
-                                 json=self.json_data)
-        print(response)
-        
-        lines=response.text.split('\n\ndata:')
-        answer = ''.join([loads(x)['choices'][0]['delta']['content'] for x in lines[1:-2]])
-        
+        while True:
+            try:
+                response = requests.post('https://chatgot-ai.chatgot.io/sql', 
+                                         headers=headers(self.authorization_key), 
+                                         json=self.json_data)
+                if response.status_code != 200:
+                    print('status' ,response.status_code)
+                    print(response.content)
+                
+                lines=response.text.split('\n\ndata:')
+                answer = ''.join([loads(x)['choices'][0]['delta']['content'] for x in lines[1:-2]])
+                break
+            except Exception as e:
+                print(e)
+                
+                
         self.json_data['messages'] += [{
             'role': 'assistant',
             'content': answer,
