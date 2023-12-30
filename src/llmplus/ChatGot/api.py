@@ -5,23 +5,21 @@ from . import Models
 
 def headers(authorization):
     h = {
-        'authority': 'chatgot-ai.chatgot.io',
-        'accept': '*/*',
-        'accept-language': 'en-US,en;q=0.9',
-        'authorization': authorization,
-        'cache-control': 'no-cache',
-        'content-type': 'application/json',
-        'origin': 'https://start.chatgot.io',
-        'pragma': 'no-cache',
-        'referer': 'https://start.chatgot.io/',
-        'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-site',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    }
+        'Accept': '*/*',
+   'Accept-Language': 'en-US,en;q=0.9',
+   'Authorization': authorization,
+   'Connection': 'keep-alive',
+   'Origin': 'https://start.chatgot.io',
+   'Referer': 'https://start.chatgot.io/',
+   'Sec-Fetch-Dest': 'empty',
+   'Sec-Fetch-Mode': 'cors',
+   'Sec-Fetch-Site': 'same-site',
+   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+   'content-type': 'application/json',
+   'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+   'sec-ch-ua-mobile': '?0',
+   'sec-ch-ua-platform': '"Windows"',
+       }
     return h
 
 class API:
@@ -45,6 +43,7 @@ class API:
                 'isActived': True,
                 'value': 'GPT-4 128k',
                 'isReplying': True,
+                'prompt': ''
             },
             'messages': [],
         }
@@ -62,10 +61,10 @@ class API:
     
         while True:
             try:
-                response = requests.post('https://chatgot-ai.chatgot.io/sql', 
+                response = requests.post('https://api.chatgot.io/api/chat/conver', 
                                          headers=headers(self.authorization_key), 
                                          json=self.json_data)
-                if response.status_code != 200:
+                if response.status_code not in [200, 201]:
                     print('status' ,response.status_code)
                     print(response.content)
                 
