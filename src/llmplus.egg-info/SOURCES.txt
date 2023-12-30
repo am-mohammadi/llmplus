@@ -1,6 +1,7 @@
 LICENSE
 README.md
 pyproject.toml
+src/llmplus/Manual.py
 src/llmplus.egg-info/PKG-INFO
 src/llmplus.egg-info/SOURCES.txt
 src/llmplus.egg-info/dependency_links.txt
