@@ -14,6 +14,7 @@ class API:
         self.chats = []
         self.WIN_VAR_NAME = "llmState"
         self.timeout = 120
+        self.model = 'gpt'  #gpt/claude
         
     def set_switch(self, state):
         key = OpenKey(HKEY_CURRENT_USER, 'Environment', 0, KEY_ALL_ACCESS)
@@ -28,11 +29,13 @@ class API:
         return value
     
     def send(self, text):
-        if self.get_switch() != 'PA_ready':
-            raise Exception("llmService is not running!")
+        while self.get_switch() != 'PA_ready':
+            print("Please run the llmService.")
+            input('Enter any key to continue...')
+            break
             
         clipboard.copy(text)
-        self.set_switch("python_waiting")
+        self.set_switch(f"waiting_{self.model}")
         print("Wating for PA response...")
         
         c = 0
@@ -55,5 +58,6 @@ class API:
         
 if __name__ == '__main__':
     llm = API()
-    answer = llm.send('what is 4+3?')
+    llm.model = 'claude'
+    answer = llm.send('what is 4+4?')
     print(answer)
