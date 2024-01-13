@@ -2,8 +2,11 @@ from keycrypt import get_secret, set_secret
 from pandas.io import clipboard
 from time import sleep
 
-
-
+from winreg import (
+    CloseKey, OpenKey, QueryValueEx, SetValueEx,
+    HKEY_CURRENT_USER,
+    KEY_ALL_ACCESS, KEY_READ, REG_EXPAND_SZ
+)
     
     
 class API:
@@ -13,10 +16,16 @@ class API:
         self.timeout = 120
         
     def set_switch(self, state):
-        set_secret(self.WIN_VAR_NAME, state)
+        key = OpenKey(HKEY_CURRENT_USER, 'Environment', 0, KEY_ALL_ACCESS)
+        SetValueEx(key, self.WIN_VAR_NAME, 0, REG_EXPAND_SZ, state)
+        CloseKey(key)
         
     def get_switch(self):
-        return get_secret(self.WIN_VAR_NAME)
+        root = HKEY_CURRENT_USER
+        subkey = 'Environment'
+        key = OpenKey(root, subkey, 0, KEY_READ)
+        value, _ = QueryValueEx(key, self.WIN_VAR_NAME)
+        return value
     
     def send(self, text):
         if self.get_switch() != 'PA_ready':
@@ -46,5 +55,5 @@ class API:
         
 if __name__ == '__main__':
     llm = API()
-    answer = llm.send('what is 3+3?')
+    answer = llm.send('what is 4+3?')
     print(answer)
