@@ -1,6 +1,6 @@
 [project]
 name = "llmplus"
-version = "0.2.0"
+version = "0.2.1"
 authors = [
   { name="Amirmahdi Mohammadi", email="mohamadi.mahdi.6@gmail.com" },
 ]
